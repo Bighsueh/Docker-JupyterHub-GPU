@@ -12,10 +12,13 @@ RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 RUN apt-get update && apt-get install -y nvidia-container-toolkit
 
 # Add a user
-RUN useradd -ms /bin/bash jupyterhub-user
+RUN useradd -ms /bin/bash admin
+
+# Add a user and set password
+RUN useradd -ms /bin/bash admin && echo "admin:admin" | chpasswd
 
 # Set the working directory
-WORKDIR /home/jupyterhub-user
+WORKDIR /home/admin
 
 # Start JupyterHub
 CMD ["jupyterhub", "--ip", "0.0.0.0"]
