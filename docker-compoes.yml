@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  jupyterhub:
+    build:
+      context: .
+    runtime: nvidia
+    ports:
+      - "8000:8000"
